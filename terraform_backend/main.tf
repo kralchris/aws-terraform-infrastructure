@@ -197,9 +197,9 @@ resource "aws_instance" "t2_micro_instance" {
   subnet_id     = aws_subnet.public1.id
 
   root_block_device {
-    volume_type   = "gp3"
-    volume_size   = 20
-    encrypted     = true
+    volume_type = "gp3"
+    volume_size = 20
+    encrypted   = true
   }
 
   tags = {
@@ -214,9 +214,9 @@ resource "aws_instance" "t2_small_instance" {
   subnet_id     = aws_subnet.public2.id
 
   root_block_device {
-    volume_type   = "gp2"
-    volume_size   = 20
-    encrypted     = true
+    volume_type = "gp2"
+    volume_size = 20
+    encrypted   = true
   }
 
   tags = {
