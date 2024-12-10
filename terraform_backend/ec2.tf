@@ -60,6 +60,7 @@ resource "aws_instance" "webserver_1" {
   ami           = var.ami_id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private1.id
+  vpc_security_group_ids = [aws_security_group.alb_sg.id]
 
   root_block_device {
     volume_type = "gp3"
@@ -77,6 +78,7 @@ resource "aws_instance" "webserver_2" {
   ami           = var.ami_id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private2.id
+  vpc_security_group_ids = [aws_security_group.alb_sg.id]
 
   root_block_device {
     volume_type = "gp3"
