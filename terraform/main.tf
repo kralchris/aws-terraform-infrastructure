@@ -155,7 +155,7 @@ resource "aws_subnet" "private2" {
 
 # Elastic IP for NAT Gateway
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = true
 }
 
 # NAT Gateway for Private Subnets
@@ -192,7 +192,7 @@ resource "aws_route_table_association" "private2" {
 
 # EC2 Instance: T2 Micro with 20GB Encrypted EBS
 resource "aws_instance" "t2_micro_instance" {
-  ami           = "ami-0c02fb55956c7d316"
+  ami           = var.ami_id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public1.id
 
@@ -209,7 +209,7 @@ resource "aws_instance" "t2_micro_instance" {
 
 # EC2 Instance: T2 Small with 20GB Encrypted EBS
 resource "aws_instance" "t2_small_instance" {
-  ami           = "ami-0c02fb55956c7d316"
+  ami           = var.ami_id
   instance_type = "t2.small"
   subnet_id     = aws_subnet.public2.id
 
