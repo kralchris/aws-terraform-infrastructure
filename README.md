@@ -12,6 +12,10 @@ This repository contains Terraform configurations and scripts to provision a clo
 - **Application Load Balancer (ALB)**: High availability and traffic distribution across instances.
 - **Automated Web Server Setup**: Bash script to configure Apache on EC2 instances.
 
+## Diagram
+![aws_diagram](https://github.com/user-attachments/assets/9b93bfa5-8422-404a-85d2-4be0783e8e34)
+
+
 ## File Structure
 - `main.tf`: Entry point for Terraform configurations.
 - `backend_setup.tf`: Configuration for remote state management.
