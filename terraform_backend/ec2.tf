@@ -4,7 +4,7 @@ resource "aws_subnet" "private1" {
   cidr_block        = "10.0.3.0/24"
   availability_zone = "eu-west-1a"
   tags = {
-    Name = "private-subnet-1-internship-kristijan"
+    Name = "private_subnet_1_internship_kristijan"
   }
 }
 
@@ -14,13 +14,13 @@ resource "aws_subnet" "private2" {
   cidr_block        = "10.0.4.0/24"
   availability_zone = "eu-west-1b"
   tags = {
-    Name = "private-subnet-2-internship-kristijan"
+    Name = "private_subnet_2_internship_kristijan"
   }
 }
 
 # Elastic IP for NAT Gateway
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 }
 
 # NAT Gateway for Private Subnets
@@ -28,7 +28,7 @@ resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public1.id
   tags = {
-    Name = "main-nat-gateway-internship-kristijan"
+    Name = "main_nat_gateway_internship_kristijan"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.main.id
   }
   tags = {
-    Name = "private-route-table-internship-kristijan"
+    Name = "private_route_table_internship_kristijan"
   }
 }
 
@@ -57,10 +57,11 @@ resource "aws_route_table_association" "private2" {
 
 # EC2 Instance: T2 Micro with 20GB Encrypted EBS
 resource "aws_instance" "webserver_1" {
-  ami           = var.ami_id
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.private1.id
-  vpc_security_group_ids = [aws_security_group.alb_sg.id]
+  ami                    = var.ami_id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.private1.id
+  vpc_security_group_ids = [aws_security_group.security_group.id]
+  user_data = file("install_webserver.sh")
 
   root_block_device {
     volume_type = "gp3"
@@ -69,16 +70,17 @@ resource "aws_instance" "webserver_1" {
   }
 
   tags = {
-    Name = "webserver-1-internship-kristijan"
+    Name = "webserver_1_internship_kristijan"
   }
 }
 
 # EC2 Instance: T2 Micro with 20GB Encrypted EBS
 resource "aws_instance" "webserver_2" {
-  ami           = var.ami_id
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.private2.id
-  vpc_security_group_ids = [aws_security_group.alb_sg.id]
+  ami                    = var.ami_id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.private2.id
+  vpc_security_group_ids = [aws_security_group.security_group.id]
+  user_data = file("install_webserver.sh")
 
   root_block_device {
     volume_type = "gp3"
@@ -87,6 +89,6 @@ resource "aws_instance" "webserver_2" {
   }
 
   tags = {
-    Name = "webserver-2-internship-kristijan"
+    Name = "webserver_2_internship_kristijan"
   }
 }

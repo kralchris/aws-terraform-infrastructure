@@ -5,7 +5,7 @@ resource "aws_subnet" "public1" {
   map_public_ip_on_launch = true
   availability_zone       = "eu-west-1a"
   tags = {
-    Name = "public-subnet-1-internship-kristijan"
+    Name = "public_subnet_1_internship_kristijan"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "public2" {
   map_public_ip_on_launch = true
   availability_zone       = "eu-west-1b"
   tags = {
-    Name = "public-subnet-2-internship-kristijan"
+    Name = "public_subnet_2_internship_kristijan"
   }
 }
 
@@ -28,7 +28,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.main.id
   }
   tags = {
-    Name = "public-route-table-internship-kristijan"
+    Name = "public_route_table_internship_kristijan"
   }
 }
 
