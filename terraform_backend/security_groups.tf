@@ -9,6 +9,7 @@ resource "aws_security_group" "security_group" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
     cidr_blocks = ["0.0.0.0/0"]
   }
 
